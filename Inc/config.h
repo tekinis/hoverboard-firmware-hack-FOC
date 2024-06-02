@@ -143,12 +143,12 @@
 #define TRQ_MODE        3               // [-] TORQUE mode
 
 // Enable/Disable Motor
-#define MOTOR_LEFT_ENA                  // [-] Enable LEFT motor.  Comment-out if this motor is not needed to be operational
+//#define MOTOR_LEFT_ENA                  // [-] Enable LEFT motor.  Comment-out if this motor is not needed to be operational
 #define MOTOR_RIGHT_ENA                 // [-] Enable RIGHT motor. Comment-out if this motor is not needed to be operational
 
 // Control selections
 #define CTRL_TYP_SEL    FOC_CTRL        // [-] Control type selection: COM_CTRL, SIN_CTRL, FOC_CTRL (default)
-#define CTRL_MOD_REQ    VLT_MODE        // [-] Control mode request: OPEN_MODE, VLT_MODE (default), SPD_MODE, TRQ_MODE. Note: SPD_MODE and TRQ_MODE are only available for CTRL_FOC!
+#define CTRL_MOD_REQ    TRQ_MODE        // [-] Control mode request: OPEN_MODE, VLT_MODE (default), SPD_MODE, TRQ_MODE. Note: SPD_MODE and TRQ_MODE are only available for CTRL_FOC!
 #define DIAG_ENA        1               // [-] Motor Diagnostics enable flag: 0 = Disabled, 1 = Enabled (default)
 
 // Limitation settings
@@ -157,14 +157,14 @@
 #define N_MOT_MAX       1000            // [rpm] Maximum motor speed limit
 
 // Field Weakening / Phase Advance
-#define FIELD_WEAK_ENA  0               // [-] Field Weakening / Phase Advance enable flag: 0 = Disabled (default), 1 = Enabled
+#define FIELD_WEAK_ENA  1               // [-] Field Weakening / Phase Advance enable flag: 0 = Disabled (default), 1 = Enabled
 #define FIELD_WEAK_MAX  5               // [A] Maximum Field Weakening D axis current (only for FOC). Higher current results in higher maximum speed. Up to 10A has been tested using 10" wheels.
 #define PHASE_ADV_MAX   25              // [deg] Maximum Phase Advance angle (only for SIN). Higher angle results in higher maximum speed.
 #define FIELD_WEAK_HI   1000            // (1000, 1500] Input target High threshold for reaching maximum Field Weakening / Phase Advance. Do NOT set this higher than 1500.
 #define FIELD_WEAK_LO   750             // ( 500, 1000] Input target Low threshold for starting Field Weakening / Phase Advance. Do NOT set this higher than 1000.
 
 // Extra functionality
-// #define STANDSTILL_HOLD_ENABLE          // [-] Flag to hold the position when standtill is reached. Only available and makes sense for VOLTAGE or TORQUE mode.
+ #define STANDSTILL_HOLD_ENABLE          // [-] Flag to hold the position when standtill is reached. Only available and makes sense for VOLTAGE or TORQUE mode.
 // #define ELECTRIC_BRAKE_ENABLE           // [-] Flag to enable electric brake and replace the motor "freewheel" with a constant braking when the input torque request is 0. Only available and makes sense for TORQUE mode.
 // #define ELECTRIC_BRAKE_MAX    100       // (0, 500) Maximum electric brake to be applied when input torque request is 0 (pedal fully released).
 // #define ELECTRIC_BRAKE_THRES  120       // (0, 500) Threshold below at which the electric brake starts engaging.
@@ -500,10 +500,10 @@
 #ifdef VARIANT_HOVERCAR
   #define FLASH_WRITE_KEY         0x1107  // Flash memory writing key. Change this key to ignore the input calibrations from the flash memory and use the ones in config.h
   #undef  CTRL_MOD_REQ
-  #define CTRL_MOD_REQ            VLT_MODE  // HOVERCAR works best in TORQUE Mode. VOLTAGE mode is preffered when freewheeling is not desired when throttle is released.
+  #define CTRL_MOD_REQ            TRQ_MODE  // HOVERCAR works best in TORQUE Mode. VOLTAGE mode is preffered when freewheeling is not desired when throttle is released.
   #define CONTROL_ADC             0         // use ADC as input. Number indicates priority for dual-input. Disable CONTROL_SERIAL_USART2, FEEDBACK_SERIAL_USART2, DEBUG_SERIAL_USART2!
-  #define SIDEBOARD_SERIAL_USART3 1         // Rx from right sensor board: to use photosensors as buttons. Number indicates priority for dual-input. Comment-out if sideboard is not used!
-  #define FEEDBACK_SERIAL_USART3            // Tx to   right sensor board: for LED battery indication. Comment-out if sideboard is not used!
+  //#define SIDEBOARD_SERIAL_USART3 1         // Rx from right sensor board: to use photosensors as buttons. Number indicates priority for dual-input. Comment-out if sideboard is not used!
+  //#define FEEDBACK_SERIAL_USART3            // Tx to   right sensor board: for LED battery indication. Comment-out if sideboard is not used!
 
   #define DUAL_INPUTS                       // ADC*(Primary) + Sideboard_R(Auxiliary). Uncomment this to use Dual-inputs
   #define PRI_INPUT1              1,  1000, 0, 2500, 0  // Pedal Brake        TYPE, MIN, MID, MAX, DEADBAND. See INPUT FORMAT section
@@ -534,8 +534,8 @@
       #define MULTI_MODE_M1_N_MOT_MAX   30
 
       // INTERMEDIATE MODE: Power ON + Brake [pressed] + Throttle [released]
-      #define MULTI_MODE_DRIVE_M2_MAX   500
-      #define MULTI_MODE_DRIVE_M2_RATE  300
+      #define MULTI_MODE_DRIVE_M2_MAX   800
+      #define MULTI_MODE_DRIVE_M2_RATE  400
       #define MULTI_MODE_M2_I_MOT_MAX   8
       #define MULTI_MODE_M2_N_MOT_MAX   80
 
