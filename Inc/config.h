@@ -147,8 +147,8 @@
 //#define MOTOR_RIGHT_ENA                 // [-] Enable RIGHT motor. Comment-out if this motor is not needed to be operational
 
 // Control selections
-#define CTRL_TYP_SEL    SIN_CTRL        // [-] Control type selection: COM_CTRL, SIN_CTRL, FOC_CTRL (default)
-#define CTRL_MOD_REQ    SPD_MODE        // [-] Control mode request: OPEN_MODE, VLT_MODE (default), SPD_MODE, TRQ_MODE. Note: SPD_MODE and TRQ_MODE are only available for CTRL_FOC!
+#define CTRL_TYP_SEL    FOC_CTRL        // [-] Control type selection: COM_CTRL, SIN_CTRL, FOC_CTRL (default)
+#define CTRL_MOD_REQ    TRQ_MODE        // [-] Control mode request: OPEN_MODE, VLT_MODE (default), SPD_MODE, TRQ_MODE. Note: SPD_MODE and TRQ_MODE are only available for CTRL_FOC!
 #define DIAG_ENA        1               // [-] Motor Diagnostics enable flag: 0 = Disabled, 1 = Enabled (default)
 
 // Limitation settings
@@ -508,8 +508,8 @@
   //#define DUAL_INPUTS                       // ADC*(Primary) + Sideboard_R(Auxiliary). Uncomment this to use Dual-inputs
   #define PRI_INPUT1              3,  0, 0, 4095, 0  // Pedal Brake        TYPE, MIN, MID, MAX, DEADBAND. See INPUT FORMAT section
   #define PRI_INPUT2              3,   0, 0, 4095, 0  // Pedal Accel        TYPE, MIN, MID, MAX, DEADBAND. See INPUT FORMAT section
-//#define AUX_INPUT1              2, -1000, 0, 1000, 0  // Sideboard Steer    TYPE, MIN, MID, MAX, DEADBAND. See INPUT FORMAT section
-//#define AUX_INPUT2              2, -1000, 0, 1000, 0  // Sideboard Speed    TYPE, MIN, MID, MAX, DEADBAND. See INPUT FORMAT section
+  #define AUX_INPUT1              2, -1000, 0, 1000, 0  // Sideboard Steer    TYPE, MIN, MID, MAX, DEADBAND. See INPUT FORMAT section
+  #define AUX_INPUT2              2, -1000, 0, 1000, 0  // Sideboard Speed    TYPE, MIN, MID, MAX, DEADBAND. See INPUT FORMAT section
 
   #define SPEED_COEFFICIENT       16384     // 1.0f
   #define STEER_COEFFICIENT       8192      // 0.5f Only active in Sideboard input
